@@ -71,12 +71,8 @@
   }
 </script>
 <script module="test" lang="renderjs">
-	export default {
-		mounted() {
-			// ...
-		},
+	export default {  
 		methods: {
-			// ...
       renderHandleClick(event, ownerInstance){
         // 直接触发renderjs点击
         // event是事件对象 获取传入的参数        
@@ -97,7 +93,6 @@
         // oldValue 修改前的service中定义的msg值
         // ownerVm  用来调用service层的方法 
       }
-
 		}
 	}
 </script>
