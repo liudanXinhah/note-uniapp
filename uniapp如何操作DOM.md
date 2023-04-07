@@ -35,13 +35,17 @@
 ####  4.使用方式：
 ```html
 <template>
-  <div>
+  <view>
     <!-- test 指的是script标签中module的值，可自定义 -->
     <button @click="test.renderHandleClick" >直接触发renderjs点击</button>
     <button @click="serviceHandleClick">直接触发service点击</button>
-    <button @click="test.serviceToRenderjsHandleClick" :msg="msg" :change:msg="test.ToRenderjsHandleClick">通过service触发renderjs点击</button>
+    <button 
+      @click="test.serviceToRenderjsHandleClick" 
+      :msg="msg" 
+      :change:msg="test.ToRenderjsHandleClick"
+    >通过service触发renderjs点击</button>
     <button @click="test.renderjsToServiceHandleClick" >通过renderjs触发service点击</button>
-  </div>
+  </view>
 <template>
 <script>
 	export default {
@@ -73,26 +77,26 @@
 <script module="test" lang="renderjs">
 	export default {  
 		methods: {
-      renderHandleClick(event, ownerInstance){
-        // 直接触发renderjs点击
-        // event是事件对象 获取传入的参数        
-        // ownerInstance和this.$ownerInstance是一样的，用来调用service层的方法 
-         
-      },
-      renderjsToServiceHandleClick(event, ownerInstance){
-        /**
-          * ownerInstance: 第一个参数是方法名，第二个参数是传过去的参数
-          * 方式一：ownerInstance.callMethod('ToServiceHandleClick', data) 
-          * 方式二：this.$ownerInstance.callMethod('ToServiceHandleClick', data)
-          */
-        ownerInstance.callMethod('ToServiceHandleClick', event) 
-        this.$ownerInstance.callMethod('ToServiceHandleClick', event)
-      },
-      ToRenderjsHandleClick(newValue, oldValue, ownerVm){
-        // newValue 修改后的service中定义的msg值
-        // oldValue 修改前的service中定义的msg值
-        // ownerVm  用来调用service层的方法 
-      }
+            renderHandleClick(event, ownerInstance){
+              // 直接触发renderjs点击
+              // event是事件对象 获取传入的参数        
+              // ownerInstance和this.$ownerInstance是一样的，用来调用service层的方法 
+              
+            },
+            renderjsToServiceHandleClick(event, ownerInstance){
+              /**
+                * ownerInstance: 第一个参数是方法名，第二个参数是传过去的参数
+                * 方式一：ownerInstance.callMethod('ToServiceHandleClick', data) 
+                * 方式二：this.$ownerInstance.callMethod('ToServiceHandleClick', data)
+                */
+              ownerInstance.callMethod('ToServiceHandleClick', event) 
+              this.$ownerInstance.callMethod('ToServiceHandleClick', event)
+            },
+            ToRenderjsHandleClick(newValue, oldValue, ownerVm){
+              // newValue 修改后的service中定义的msg值
+              // oldValue 修改前的service中定义的msg值
+              // ownerVm  用来调用service层的方法 
+            }
 		}
 	}
 </script>
