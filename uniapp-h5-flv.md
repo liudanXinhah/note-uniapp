@@ -46,7 +46,7 @@
   * copy node_modules/easy-player/dist/component/crossdomain.xml 到 www 根目录
   * copy node_modules/easy-player/dist/component/easy-player-lib.min.js 到 www 根目录
   * 以上 copy 操作通过 webpack 完成, 编辑你的 webpack.config.js
-  ```
+  ```js
     ......
         // copy js lib and swf files to dist dir
         new CopyWebpackPlugin([
@@ -58,22 +58,23 @@
   ```
   * 在 html 中引用 www 根目录 easy-player-lib.min.js
   * 编辑你的 Vue 组件
-  ```
-    ......
+  ```vue
+    <template>
     <EasyPlayer :videoUrl="videoUrl" fluent autoplay live stretch></EasyPlayer>
-    ......
+    </template>
+    <script>
     import EasyPlayer from 'easy-player'
-    ......
+    export default {
       components: {
         EasyPlayer
       }
-    ......
-
+    }
+    </script>
   ```
 >3.3脱离 Vue 使用:
 * 在 html 中引用 www 根目录 easy-player-element.min.js
 * HTML 集成 Demo
-```
+```html
   <!DOCTYPE HTML>
   <html>
       <head>
@@ -93,3 +94,18 @@
 ### 4.常见问题
  > 在html中集成Deme时在本地环境能正常播放flv，但是上到服务器后就黑屏。  
  >> 必须将 EasyPlayer.wasm 文件放在服务器根目录下，比如访问的路劲为 https://zhgd.zghxsjy.com/qr/flv_test/flv.html ,那么就应该放在 https://zhgd.zghxsjy.com 根目录下。因为在 easy-player-element.min.js 中获取 EasyPlayer.wasm 的方式为 window.location.origin 从根目录获取。
+ > 怎么隐藏默认进度条
+ >> 在头部style中添加样式隐藏：
+ ```css
+ .vjs-control-bar { display: none !important; }
+ ```
+ > 怎么动态设置 video-url 的值：
+ >> 可以动过URL传参并通过JS设置元素属性的方式实现：
+ ```js
+  // 获取直播地址
+  let url = window.location.href.split('?')[1].split('=')[1].split('&')[0]
+  // 获取组件DOM 实例
+  let player = document.getElementById('player')
+  // 添加静态方法
+  player.setAttribute("video-url", url);
+ ```
