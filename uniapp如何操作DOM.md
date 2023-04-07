@@ -66,7 +66,7 @@
          * 2.修改data中定义的 msg 触发renderjs中的事件
          */
         this.msg = Math.random() || {a:'xxx',b:'xxx'}
-      }
+      },
       ToServiceHandleClick(data){
         // 这是从renderjs触发service中的方法
         // data 为传递过来的值
