@@ -92,4 +92,4 @@
 
 ### 4.常见问题
  > 在html中集成Deme时在本地环境能正常播放flv，但是上到服务器后就黑屏。  
- >> 必须将 EasyPlayer.wasm 文件放在服务器根目录下，比如访问的路劲为 https://zhgd.zghxsjy.com/qr/flv_test/flv.html ,那么就应该放在 https://zhgd.zghxsjy.com 根目录下。因为在 easy-player-element.min.js 中获取 EasyPlayer.wasm 的方式为从根目录获取。
+ >> 必须将 EasyPlayer.wasm 文件放在服务器根目录下，比如访问的路劲为 https://zhgd.zghxsjy.com/qr/flv_test/flv.html ,那么就应该放在 https://zhgd.zghxsjy.com 根目录下。因为在 easy-player-element.min.js 中获取 EasyPlayer.wasm 的方式为 window.location.origin 从根目录获取。
